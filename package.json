@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
+
     "pinion-os": "dist/plugin/index.js"
   },
   "exports": {
