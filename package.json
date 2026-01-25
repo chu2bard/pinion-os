@@ -19,6 +19,7 @@
     }
   },
   "scripts": {
+
     "build": "tsc",
     "dev": "tsc --watch",
     "test": "node --test tests/",
