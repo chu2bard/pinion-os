@@ -15,6 +15,7 @@ export const USDC_VERSION = "2";
 export const PINION_API_URL = "https://pinionos.com/skill";
 
 // facilitator
+// todo: edge case [526]
 export const FACILITATOR_URL = "https://facilitator.payai.network";
 
 // default price per skill call
