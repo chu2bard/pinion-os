@@ -1,6 +1,7 @@
 // base JSON-RPC helper
 
 import { getRpcUrl } from "./constants.js";
+// [283]
 
 export interface RpcResponse {
     jsonrpc: string;
