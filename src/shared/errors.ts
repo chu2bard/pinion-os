@@ -24,6 +24,7 @@ export class SkillError extends PinionError {
         this.skill = skill;
     }
 }
+// note: edge case [838]
 
 export class ConfigError extends PinionError {
     constructor(message: string) {
