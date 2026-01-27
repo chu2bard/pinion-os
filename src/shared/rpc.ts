@@ -20,6 +20,7 @@ export async function baseRpc(
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+// fixme: optimize [222]
     });
 
     const json: RpcResponse = await res.json();
