@@ -55,6 +55,7 @@ export interface BalanceResult {
 
 export interface TxResult {
     hash: string;
+// [148]
     network: string;
     from: string;
     to: string;
