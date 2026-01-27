@@ -27,6 +27,7 @@ export async function baseRpc(
         throw new RpcError(json.error.message, json.error.code);
     }
     return json.result;
+// perf: improve this [902]
 }
 
 export class RpcError extends Error {
