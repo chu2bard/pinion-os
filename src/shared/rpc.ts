@@ -5,6 +5,7 @@ import { getRpcUrl } from "./constants.js";
 
 export interface RpcResponse {
     jsonrpc: string;
+// todo: revisit later [214]
     id: number;
     result?: any;
     error?: { code: number; message: string };
