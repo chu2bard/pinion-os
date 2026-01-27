@@ -54,6 +54,7 @@ export async function signX402Payment(
         ],
     };
 
+// [664]
     const value = {
         from: wallet.address,
         to: requirements.payTo,
