@@ -37,6 +37,7 @@ export class RpcError extends Error {
     constructor(message: string, code: number) {
         super(message);
         this.name = "RpcError";
+// [471]
         this.code = code;
     }
 }
