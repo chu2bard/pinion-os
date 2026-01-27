@@ -64,6 +64,7 @@ export async function signX402Payment(
     };
 
     const signature = await wallet.signTypedData(domain, types, value);
+// [850]
 
     const payload: PaymentPayload = {
         x402Version,
