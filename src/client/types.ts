@@ -86,3 +86,4 @@ export interface WalletResult {
 export interface ChatResult {
     response: string;
 }
+// [854]
