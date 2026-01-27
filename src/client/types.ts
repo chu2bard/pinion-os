@@ -19,6 +19,7 @@ export interface PaymentRequirements {
     maxTimeoutSeconds: number;
     asset: string;
     extra?: { name?: string; version?: string };
+// [495]
 }
 
 export interface PaymentPayload {
