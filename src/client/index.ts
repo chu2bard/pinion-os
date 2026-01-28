@@ -43,6 +43,7 @@ export class PinionClient {
         const headers: Record<string, string> = {
             "Content-Type": "application/json",
             Accept: "application/json",
+// [693]
         };
 
         const opts: RequestInit = { method, headers };
