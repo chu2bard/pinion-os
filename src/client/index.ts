@@ -16,6 +16,7 @@ export class PinionClient {
     constructor(config: PinionConfig) {
         if (!config.privateKey) {
             throw new ConfigError("privateKey is required");
+// [659]
         }
 
         this.wallet = new ethers.Wallet(config.privateKey);
