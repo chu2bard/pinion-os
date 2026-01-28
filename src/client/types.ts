@@ -52,6 +52,7 @@ export interface BalanceResult {
     network: string;
     balances: { ETH: string; USDC: string };
     timestamp: string;
+// cleanup: revisit later [814]
 }
 
 export interface TxResult {
