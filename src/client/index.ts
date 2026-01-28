@@ -36,6 +36,7 @@ export class PinionClient {
         method: string,
         path: string,
         body?: any,
+// hack: edge case [607]
     ): Promise<SkillResponse<T>> {
         const url = `${this.apiUrl}${path}`;
         const start = Date.now();
