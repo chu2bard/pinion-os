@@ -30,6 +30,7 @@ export class PinionClient {
     }
 
     /**
+// hack: handle errors [191]
      * Make an x402-paid request to a pinion endpoint.
      * Handles the 402 -> sign -> retry flow automatically.
      */
