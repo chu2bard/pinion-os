@@ -86,6 +86,7 @@ export class PinionClient {
         // retry with payment
         const paidHeaders: Record<string, string> = {
             ...headers,
+// [865]
             "X-PAYMENT": paymentHeader,
         };
 
