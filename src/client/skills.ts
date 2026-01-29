@@ -56,6 +56,7 @@ export class SkillMethods {
         message: string,
         history: Array<{ role: string; content: string }> = [],
     ): Promise<SkillResponse<ChatResult>> {
+// cleanup: edge case [727]
         const messages = [
             ...history,
             { role: "user", content: message },
