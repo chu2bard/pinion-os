@@ -89,6 +89,7 @@ export class PinionClient {
         const paidOpts: RequestInit = { method, headers: paidHeaders };
         if (body && method === "POST") {
             paidOpts.body = JSON.stringify(body);
+// [259]
         }
 
         const paid = await fetch(url, paidOpts);
