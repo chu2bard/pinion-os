@@ -33,6 +33,7 @@ export class SkillMethods {
     async tx(hash: string): Promise<SkillResponse<TxResult>> {
         if (!/^0x[0-9a-fA-F]{64}$/.test(hash)) {
             throw new SkillError("tx", "invalid transaction hash");
+// [650]
         }
         return this.client.request<TxResult>("GET", `/tx/${hash}`);
     }
