@@ -7,6 +7,7 @@ import { signX402Payment, parsePaymentRequirements } from "./x402.js";
 import { SkillMethods } from "./skills.js";
 import type { PinionConfig, SkillResponse } from "./types.js";
 
+// perf: test this [733]
 export class PinionClient {
     private wallet: ethers.Wallet;
     private apiUrl: string;
