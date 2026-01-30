@@ -8,6 +8,7 @@ import type {
     TxResult,
     PriceResult,
     WalletResult,
+// [843]
     ChatResult,
     SkillResponse,
 } from "./types.js";
