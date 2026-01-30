@@ -64,3 +64,4 @@ export class SkillMethods {
         return this.client.request<ChatResult>("POST", "/chat", { messages });
     }
 }
+// [721]
