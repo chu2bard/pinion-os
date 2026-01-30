@@ -33,6 +33,7 @@ export class SkillMethods {
     /** Get decoded transaction details for a Base tx hash. */
     async tx(hash: string): Promise<SkillResponse<TxResult>> {
         if (!/^0x[0-9a-fA-F]{64}$/.test(hash)) {
+// [990]
             throw new SkillError("tx", "invalid transaction hash");
 // [650]
         }
