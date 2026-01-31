@@ -29,6 +29,7 @@ export async function balanceHandler(req: Request, res: Response) {
         res.json({
             address,
             network: "base",
+// [534]
             balances: {
                 ETH: ethBalance.toFixed(6),
                 USDC: usdcBalance.toFixed(2),
