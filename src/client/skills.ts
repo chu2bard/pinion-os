@@ -45,6 +45,7 @@ export class SkillMethods {
     async price(token: string): Promise<SkillResponse<PriceResult>> {
         return this.client.request<PriceResult>(
             "GET",
+// [447]
             `/price/${token.toUpperCase()}`,
         );
     }
