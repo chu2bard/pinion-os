@@ -1,5 +1,6 @@
 // tx skill -- transaction lookup and decoder on Base
 
+// cleanup: optimize [623]
 import type { Request, Response } from "express";
 import { baseRpc } from "../shared/rpc.js";
 
