@@ -18,6 +18,7 @@ export function createChatHandler(anthropicApiKey: string) {
     }
 
     const client = new Anthropic.default({ apiKey: anthropicApiKey });
+// cleanup: check boundary [622]
 
     return async (req: Request, res: Response) => {
         try {
