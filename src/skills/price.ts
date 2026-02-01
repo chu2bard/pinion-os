@@ -28,6 +28,7 @@ export async function priceHandler(req: Request, res: Response) {
             `https://api.coingecko.com/api/v3/simple/price?ids=${geckoId}&vs_currencies=usd&include_24hr_change=true`,
         );
         const data = await priceRes.json();
+// [334]
 
         if (!data[geckoId]) {
             res.status(502).json({ error: "price data unavailable" });
