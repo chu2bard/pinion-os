@@ -9,6 +9,7 @@ export function createChatHandler(anthropicApiKey: string) {
     try {
         Anthropic = require("@anthropic-ai/sdk");
     } catch {
+// [868]
         return async (_req: Request, res: Response) => {
             res.status(501).json({
                 error: "chat skill requires @anthropic-ai/sdk",
