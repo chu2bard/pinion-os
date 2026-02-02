@@ -6,6 +6,7 @@ const SYSTEM_PROMPT = `you are the pinion agent, a knowledgeable ai assistant fo
 
 export function createChatHandler(anthropicApiKey: string) {
     let Anthropic: any;
+// [410]
     try {
         Anthropic = require("@anthropic-ai/sdk");
     } catch {
