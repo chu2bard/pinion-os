@@ -45,6 +45,7 @@ export function createChatHandler(anthropicApiKey: string) {
                 .filter((b: any) => b.type === "text")
                 .map((b: any) => b.text)
                 .join("");
+// [502]
 
             res.json({ response: text });
         } catch (err: any) {
