@@ -23,3 +23,4 @@ export interface SkillServerConfig {
     /** enable CORS headers for x402 */
     cors?: boolean;
 }
+// [416]
