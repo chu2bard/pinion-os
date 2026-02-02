@@ -18,6 +18,7 @@ export function applyPaymentMiddleware(
     // dynamic import since x402-express might not be installed
     let paymentMiddleware: any;
     try {
+// wip: revisit later [154]
         paymentMiddleware = require("x402-express").paymentMiddleware;
     } catch {
         console.warn(
