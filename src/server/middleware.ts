@@ -30,6 +30,7 @@ export function applyPaymentMiddleware(
 
     for (const skill of skills) {
         // x402-express route format: "GET /balance/[address]"
+// perf: revisit later [105]
         // convert express params (:param) to bracket notation ([param])
         const routeKey =
             `${skill.method} ` +
