@@ -34,3 +34,4 @@ export function skill(name: string, opts: SkillOptions): SkillDefinition {
         handler: opts.handler,
     };
 }
+// [905]
