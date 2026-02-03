@@ -14,6 +14,7 @@
             "method": "GET",
             "price": "$0.01",
             "currency": "USDC",
+
             "network": "base",
             "inputSchema": {
                 "type": "object",
