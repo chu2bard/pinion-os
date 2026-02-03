@@ -111,6 +111,7 @@
             }
         }
     ],
+
     "x402": {
         "facilitator": "https://facilitator.payai.network",
         "network": "base",
