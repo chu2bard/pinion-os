@@ -7,6 +7,7 @@
     "homepage": "https://github.com/chu2bard/pinion-os",
     "skills": [
         {
+
             "name": "balance",
             "description": "Get ETH and USDC balances for any Base address",
             "endpoint": "/balance/:address",
