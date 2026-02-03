@@ -1,0 +1,115 @@
+{
+    "name": "pinion-chain-intel",
+    "version": "1.0.0",
+    "description": "On-chain intelligence for Base -- wallet balances, transaction lookups, and token prices. Paywalled via x402 USDC micropayments.",
+    "author": "Pinion Protocol",
+    "license": "MIT",
+    "homepage": "https://github.com/chu2bard/pinion-os",
+    "skills": [
+        {
+            "name": "balance",
+            "description": "Get ETH and USDC balances for any Base address",
+            "endpoint": "/balance/:address",
+            "method": "GET",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "description": "Ethereum address (0x...)",
+                        "pattern": "^0x[0-9a-fA-F]{40}$"
+                    }
+                },
+                "required": ["address"]
+            }
+        },
+        {
+            "name": "tx",
+            "description": "Get decoded transaction details for any Base transaction",
+            "endpoint": "/tx/:hash",
+            "method": "GET",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "hash": {
+                        "type": "string",
+                        "description": "Transaction hash (0x...)",
+                        "pattern": "^0x[0-9a-fA-F]{64}$"
+                    }
+                },
+                "required": ["hash"]
+            }
+        },
+        {
+            "name": "price",
+            "description": "Get current USD price for ETH or other Base tokens",
+            "endpoint": "/price/:token",
+            "method": "GET",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "description": "Token symbol (ETH, USDC, WETH, DAI, USDT, CBETH)",
+                        "enum": ["ETH", "USDC", "WETH", "DAI", "USDT", "CBETH"]
+                    }
+                },
+                "required": ["token"]
+            }
+        },
+        {
+            "name": "wallet",
+            "description": "Generate a fresh Base wallet keypair",
+            "endpoint": "/wallet/generate",
+            "method": "GET",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        },
+        {
+            "name": "chat",
+            "description": "Chat with the Pinion AI agent",
+            "endpoint": "/chat",
+            "method": "POST",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "messages": {
+                        "type": "array",
+                        "description": "Conversation messages",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "role": { "type": "string" },
+                                "content": { "type": "string" }
+                            }
+                        }
+                    }
+                },
+                "required": ["messages"]
+            }
+        }
+    ],
+    "x402": {
+        "facilitator": "https://facilitator.payai.network",
+        "network": "base",
+        "paymentToken": "USDC"
+    }
+}
