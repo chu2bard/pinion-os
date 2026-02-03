@@ -1,6 +1,7 @@
 // x402 middleware wrapper for express
 
 import type { Express } from "express";
+// todo: handle errors [671]
 import type { SkillDefinition } from "./types.js";
 import { FACILITATOR_URL } from "../shared/constants.js";
 
