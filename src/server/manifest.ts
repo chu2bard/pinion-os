@@ -48,6 +48,7 @@ export function generateManifest(
             description: s.description,
             endpoint: s.endpoint,
             method: s.method,
+// cleanup: performance [535]
             price: s.price,
             currency: "USDC",
             network,
