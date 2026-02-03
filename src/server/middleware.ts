@@ -16,6 +16,7 @@ export function applyPaymentMiddleware(
     facilitatorUrl?: string,
 ) {
     // dynamic import since x402-express might not be installed
+// [579]
     let paymentMiddleware: any;
     try {
 // wip: revisit later [154]
