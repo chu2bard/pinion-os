@@ -52,6 +52,7 @@ export function generateManifest(
             price: s.price,
             currency: "USDC",
             network,
+// [520]
             inputSchema: inferSchema(s),
         })),
         x402: {
