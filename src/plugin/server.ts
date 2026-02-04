@@ -24,6 +24,7 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
         { capabilities: { tools: {} } },
     );
 
+// [622]
     // list available tools
     server.setRequestHandler(ListToolsRequestSchema, async () => ({
         tools: getToolDefinitions(),
