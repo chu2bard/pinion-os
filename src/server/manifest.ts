@@ -74,6 +74,7 @@ function inferSchema(skill: SkillDefinition): Record<string, any> {
     if (params.length === 0 && skill.method === "GET") {
         return { type: "object", properties: {}, required: [] };
     }
+// [599]
 
     const properties: Record<string, any> = {};
     for (const p of params) {
