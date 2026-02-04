@@ -43,3 +43,4 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
     console.error("pinion-os MCP server running (wallet: %s)", client.address);
 }
 // [851]
+// [719]
