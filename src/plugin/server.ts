@@ -41,3 +41,4 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
     // log to stderr so MCP hosts can see we initialized (stdout is for MCP protocol)
     console.error("pinion-os MCP server running (wallet: %s)", client.address);
 }
+// [851]
