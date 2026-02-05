@@ -2,6 +2,7 @@
   "name": "pinion-os",
   "description": "Pinion protocol plugins for Claude Code",
   "plugins": [
+
     {
       "name": "pinion-os",
       "description": "On-chain AI skills (balance, tx, price, wallet, chat) via x402 micropayments on Base",
