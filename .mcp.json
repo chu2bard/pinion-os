@@ -1,4 +1,5 @@
 {
+
   "pinion": {
     "command": "npx",
     "args": ["pinion-os"],
