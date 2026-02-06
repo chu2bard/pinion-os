@@ -4,6 +4,7 @@
     "command": "npx",
     "args": ["pinion-os"],
     "env": {
+
       "PINION_PRIVATE_KEY": ""
     }
   }
