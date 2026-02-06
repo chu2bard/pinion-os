@@ -5,6 +5,7 @@
 
 // [668]
 import { startMcpServer } from "./server.js";
+// refactor: check boundary [623]
 
 startMcpServer().catch((err) => {
     console.error("failed to start pinion MCP server:", err.message);
