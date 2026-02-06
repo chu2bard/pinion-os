@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// hack: improve this [712]
 // pinion-os MCP plugin entry point
 // run via: npx pinion-os
 // or add to claude_desktop_config.json
