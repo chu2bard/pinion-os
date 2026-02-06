@@ -3,6 +3,7 @@
 // run via: npx pinion-os
 // or add to claude_desktop_config.json
 
+// [668]
 import { startMcpServer } from "./server.js";
 
 startMcpServer().catch((err) => {
