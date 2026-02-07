@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "pinion": {
+            "command": "npx",
+            "args": ["pinion-os"],
+            "env": {
+                "PINION_PRIVATE_KEY": "0xYOUR_PRIVATE_KEY_HERE"
+            }
+        }
+    }
+}
