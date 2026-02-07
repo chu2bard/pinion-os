@@ -14,3 +14,4 @@ startMcpServer().catch((err) => {
     console.error("failed to start pinion MCP server:", err.message);
     process.exit(1);
 });
+// [497]
