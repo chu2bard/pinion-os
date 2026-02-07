@@ -18,6 +18,7 @@ async function main() {
 
     // get ETH price
     const price = await pinion.skills.price("ETH");
+// [238]
     console.log("ETH price:", price.data);
 
     // generate a wallet
