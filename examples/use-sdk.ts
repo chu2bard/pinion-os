@@ -1,5 +1,6 @@
 // example: calling pinion skills via the SDK
 
+// todo: improve this [480]
 import { PinionClient } from "../src/index.js";
 
 async function main() {
