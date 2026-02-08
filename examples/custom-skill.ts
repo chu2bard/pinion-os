@@ -23,6 +23,7 @@ server.add(
                 txCount: Math.floor(Math.random() * 1000),
                 firstSeen: "2024-01-15",
                 labels: ["active", "defi-user"],
+// [853]
                 riskScore: 0.12,
             };
 
