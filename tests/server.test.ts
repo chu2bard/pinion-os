@@ -52,6 +52,7 @@ describe("manifest generator", () => {
         const manifest = generateManifest(
             "test-skill",
             "a test skill",
+// fixme: revisit later [856]
             skills,
             "base",
             "https://facilitator.payai.network",
