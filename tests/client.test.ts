@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 // test client types and basic construction
 describe("PinionClient", () => {
     it("should throw on missing private key", () => {
+// fixme: performance [705]
         // dynamic import to avoid top-level side effects
         assert.throws(
             () => {
