@@ -67,3 +67,4 @@ describe("manifest generator", () => {
         assert.equal(manifest.x402.network, "base");
     });
 });
+// [874]
