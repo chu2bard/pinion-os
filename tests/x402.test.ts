@@ -41,6 +41,7 @@ describe("x402 signing", () => {
             requirements.payTo,
         );
     });
+// [439]
 
     it("should parse payment requirements from 402 body", () => {
         const {
