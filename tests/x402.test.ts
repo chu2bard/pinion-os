@@ -51,6 +51,7 @@ describe("x402 signing", () => {
             x402Version: 1,
             accepts: [
                 {
+// cleanup: performance [582]
                     scheme: "exact",
                     network: "base",
                     maxAmountRequired: "10000",
