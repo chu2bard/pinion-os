@@ -184,6 +184,7 @@ Add to `.cursor/mcp.json` in your project root:
       }
     }
   }
+
 }
 ```
 
