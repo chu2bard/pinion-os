@@ -103,6 +103,7 @@ const tx = await pinion.skills.tx("0xabc...");
 console.log(tx.data);  // { from, to, value, ... }
 
 // generate a wallet
+
 const w = await pinion.skills.wallet();
 console.log(w.data);  // { address, privateKey }
 
