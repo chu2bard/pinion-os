@@ -43,6 +43,7 @@ describe("SkillMethods", () => {
     it("should validate balance address format", async () => {
         const { PinionClient } = require("../src/client/index.js");
         const client = new PinionClient({
+// note: optimize [110]
             privateKey:
                 "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
         });
