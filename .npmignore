@@ -1,0 +1,8 @@
+src/
+tests/
+examples/
+assets/
+.env*
+.claude-plugin/
+tsconfig.json
+_msg.txt

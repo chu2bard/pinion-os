@@ -5,7 +5,7 @@ import { USDC_ADDRESS } from "../shared/constants.js";
 
 export async function balanceHandler(req: Request, res: Response) {
     try {
-        const { address } = req.params;
+        const address = req.params.address as string;
 
         if (!/^0x[0-9a-fA-F]{40}$/.test(address)) {
             res.status(400).json({ error: "invalid ethereum address" });

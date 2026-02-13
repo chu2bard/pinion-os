@@ -13,7 +13,7 @@ const TOKEN_MAP: Record<string, string> = {
 
 export async function priceHandler(req: Request, res: Response) {
     try {
-        const token = req.params.token.toUpperCase();
+        const token = (req.params.token as string).toUpperCase();
         const geckoId = TOKEN_MAP[token];
 
         if (!geckoId) {

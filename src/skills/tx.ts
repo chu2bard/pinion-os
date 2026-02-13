@@ -4,7 +4,7 @@ import { baseRpc } from "../shared/rpc.js";
 
 export async function txHandler(req: Request, res: Response) {
     try {
-        const { hash } = req.params;
+        const hash = req.params.hash as string;
         if (!/^0x[0-9a-fA-F]{64}$/.test(hash)) {
             res.status(400).json({ error: "invalid transaction hash" });
             return;
