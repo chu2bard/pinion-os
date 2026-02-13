@@ -1,14 +1,20 @@
 {
   "name": "pinion-os",
-  "description": "Pinion protocol plugins for Claude Code",
+  "owner": {
+    "name": "chu2bard"
+  },
+  "metadata": {
+    "description": "Pinion protocol plugins for Claude Code"
+  },
   "plugins": [
-
     {
       "name": "pinion-os",
-
       "description": "On-chain AI skills (balance, tx, price, wallet, chat, send, trade, fund) via x402 micropayments on Base",
-      "source": "."
+      "version": "0.3.0",
+      "source": ".",
+      "author": { "name": "chu2bard" },
+      "homepage": "https://github.com/chu2bard/pinion-os",
+      "keywords": ["x402", "mcp", "claude", "agents", "payments", "base"]
     }
-
   ]
 }
