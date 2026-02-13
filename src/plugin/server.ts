@@ -13,29 +13,44 @@ import { loadPluginConfig, type PluginConfig } from "./config.js";
 export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
     const config = await loadPluginConfig(configOverride);
 
-    const client = new PinionClient({
-        privateKey: config.privateKey,
-        apiUrl: config.apiUrl,
-        network: config.network,
-    });
+    // lazy client -- only initialized when a key is available
+    let client: PinionClient | null = null;
+
+    if (config.privateKey) {
+        client = new PinionClient({
+            privateKey: config.privateKey,
+            apiUrl: config.apiUrl,
+            network: config.network,
+        });
+    }
 
     const server = new Server(
-        { name: "pinion-os", version: "0.3.1" },
+        { name: "pinion-os", version: "0.3.2" },
         { capabilities: { tools: {} } },
     );
+
     // list available tools
     server.setRequestHandler(ListToolsRequestSchema, async () => ({
         tools: getToolDefinitions(),
     }));
 
-    // handle tool calls
+    // handle tool calls -- pass getter/setter so pinion_setup can init the client
     server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { name, arguments: args } = request.params;
-        return handleToolCall(client, name, args || {});
+        return handleToolCall(
+            () => client,
+            (c) => { client = c; },
+            config.apiUrl,
+            config.network,
+            name,
+            args || {},
+        );
     });
 
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    // log to stderr so MCP hosts can see we initialized (stdout is for MCP protocol)
-    console.error("pinion-os MCP server running (wallet: %s)", client.address);
+    console.error(
+        "pinion-os MCP server running%s",
+        client ? ` (wallet: ${client.address})` : " (no wallet -- use pinion_setup)",
+    );
 }

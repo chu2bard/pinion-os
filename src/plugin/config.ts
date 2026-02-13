@@ -1,10 +1,9 @@
 // plugin configuration -- loads from env or args
 
-import { ConfigError } from "../shared/errors.js";
 import { PINION_API_URL } from "../shared/constants.js";
 
 export interface PluginConfig {
-    privateKey: string;
+    privateKey?: string;
     apiUrl: string;
     network: string;
 }
@@ -24,15 +23,8 @@ export async function loadPluginConfig(
         process.env.PINION_PRIVATE_KEY ||
         process.env.WALLET_KEY;
 
-    if (!privateKey) {
-        throw new ConfigError(
-            "PINION_PRIVATE_KEY or WALLET_KEY environment variable is required. " +
-                "Set it to a hex-encoded private key with USDC on Base.",
-        );
-    }
-
     return {
-        privateKey,
+        privateKey: privateKey || undefined,
         apiUrl:
             overrides?.apiUrl ||
             process.env.PINION_API_URL ||
