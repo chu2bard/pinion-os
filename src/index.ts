@@ -1,8 +1,8 @@
 // pinion-os public API
-// [705]
 
 // SDK exports
 export { PinionClient } from "./client/index.js";
+export { payX402Service } from "./client/x402-generic.js";
 export type {
     PinionConfig,
     SkillResponse,
@@ -11,8 +11,13 @@ export type {
     PriceResult,
     WalletResult,
     ChatResult,
+    SendResult,
+    TradeResult,
+    FundResult,
+    PayServiceResult,
+    UnsignedTx,
+    SpendLimitConfig,
 } from "./client/types.js";
 
 // server exports available via "pinion-os/server"
 // import { createSkillServer, skill } from "pinion-os/server"
-// [269]

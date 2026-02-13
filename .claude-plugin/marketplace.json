@@ -6,7 +6,7 @@
     {
       "name": "pinion-os",
 
-      "description": "On-chain AI skills (balance, tx, price, wallet, chat) via x402 micropayments on Base",
+      "description": "On-chain AI skills (balance, tx, price, wallet, chat, send, trade, fund) via x402 micropayments on Base",
       "source": "."
     }
 

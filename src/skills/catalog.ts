@@ -66,6 +66,36 @@ export function catalogHandler(payTo: string, network: string) {
                     "Chat with the Pinion AI agent",
                 example: "POST /chat { messages: [...] }",
             },
+            {
+                endpoint: "/send",
+                method: "POST",
+                price: "$0.01",
+                currency: "USDC",
+                network,
+                description:
+                    "Construct unsigned ETH or USDC transfer tx for Base",
+                example: 'POST /send { "to": "0x...", "amount": "0.1", "token": "ETH" }',
+            },
+            {
+                endpoint: "/trade",
+                method: "POST",
+                price: "$0.01",
+                currency: "USDC",
+                network,
+                description:
+                    "Get unsigned swap tx via 1inch aggregator on Base",
+                example: 'POST /trade { "src": "USDC", "dst": "ETH", "amount": "10", "from": "0x..." }',
+            },
+            {
+                endpoint: "/fund/:address",
+                method: "GET",
+                price: "$0.01",
+                currency: "USDC",
+                network,
+                description:
+                    "Wallet balance and funding instructions for Base",
+                example: "/fund/0x101Cd32b9bEEE93845Ead7Bc604a5F1873330acf",
+            },
         ];
         res.json({ skills, payTo, network });
     };
