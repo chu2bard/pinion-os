@@ -88,5 +88,61 @@ export interface WalletResult {
 export interface ChatResult {
     response: string;
 }
-// [854]
-// [869]
+
+export interface UnsignedTx {
+    to: string;
+    value: string;
+    data: string;
+    chainId: number;
+}
+
+export interface SendResult {
+    tx: UnsignedTx;
+    token: string;
+    amount: string;
+    network: string;
+    note: string;
+    timestamp: string;
+}
+
+export interface TradeResult {
+    swap: UnsignedTx;
+    approve?: UnsignedTx;
+    srcToken: string;
+    dstToken: string;
+    amount: string;
+    network: string;
+    router: string;
+    note: string;
+    timestamp: string;
+}
+
+export interface FundResult {
+    address: string;
+    network: string;
+    chainId: number;
+    balances: { ETH: string; USDC: string };
+    depositAddress: string;
+    funding: {
+        steps: string[];
+        minimumRecommended: { ETH: string; USDC: string };
+        bridgeUrl: string;
+    };
+    timestamp: string;
+}
+
+export interface PayServiceResult {
+    status: number;
+    data: any;
+    url: string;
+    method: string;
+    paidAmount: string;
+    responseTimeMs: number;
+}
+
+export interface SpendLimitConfig {
+    maxUsdcAtomic: bigint;
+    spent: bigint;
+    remaining: bigint;
+    callCount: number;
+}
