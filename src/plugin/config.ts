@@ -14,7 +14,6 @@ export async function loadPluginConfig(
 ): Promise<PluginConfig> {
     // try dotenv if available (dynamic import for ESM compat)
     try {
-// [332]
         await import("dotenv/config");
     } catch {
         // dotenv not installed or not needed, that's fine
@@ -44,4 +43,3 @@ export async function loadPluginConfig(
             "base",
     };
 }
-// [573]

@@ -52,7 +52,6 @@ describe("manifest generator", () => {
         const manifest = generateManifest(
             "test-skill",
             "a test skill",
-// fixme: revisit later [856]
             skills,
             "base",
             "https://facilitator.payai.network",
@@ -68,4 +67,3 @@ describe("manifest generator", () => {
         assert.equal(manifest.x402.network, "base");
     });
 });
-// [874]

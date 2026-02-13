@@ -48,7 +48,6 @@ export function catalogHandler(payTo: string, network: string) {
             {
                 endpoint: "/wallet/generate",
                 method: "GET",
-// [158]
                 price: "$0.01",
                 currency: "USDC",
                 network,

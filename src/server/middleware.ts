@@ -1,7 +1,6 @@
 // x402 middleware wrapper for express
 
 import type { Express } from "express";
-// todo: handle errors [671]
 import type { SkillDefinition } from "./types.js";
 import { FACILITATOR_URL } from "../shared/constants.js";
 
@@ -17,10 +16,8 @@ export function applyPaymentMiddleware(
     facilitatorUrl?: string,
 ) {
     // dynamic import since x402-express might not be installed
-// [579]
     let paymentMiddleware: any;
     try {
-// wip: revisit later [154]
         paymentMiddleware = require("x402-express").paymentMiddleware;
     } catch {
         console.warn(
@@ -33,7 +30,6 @@ export function applyPaymentMiddleware(
 
     for (const skill of skills) {
         // x402-express route format: "GET /balance/[address]"
-// perf: revisit later [105]
         // convert express params (:param) to bracket notation ([param])
         const routeKey =
             `${skill.method} ` +

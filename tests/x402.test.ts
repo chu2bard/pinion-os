@@ -41,8 +41,6 @@ describe("x402 signing", () => {
             requirements.payTo,
         );
     });
-// [439]
-
     it("should parse payment requirements from 402 body", () => {
         const {
             parsePaymentRequirements,
@@ -52,7 +50,6 @@ describe("x402 signing", () => {
             x402Version: 1,
             accepts: [
                 {
-// cleanup: performance [582]
                     scheme: "exact",
                     network: "base",
                     maxAmountRequired: "10000",
@@ -81,4 +78,3 @@ describe("x402 signing", () => {
         );
     });
 });
-// [122]

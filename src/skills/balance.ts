@@ -1,6 +1,4 @@
 // balance skill -- ETH and USDC balance lookup on Base
-// [735]
-
 import type { Request, Response } from "express";
 import { baseRpc } from "../shared/rpc.js";
 import { USDC_ADDRESS } from "../shared/constants.js";
@@ -29,7 +27,6 @@ export async function balanceHandler(req: Request, res: Response) {
         res.json({
             address,
             network: "base",
-// [534]
             balances: {
                 ETH: ethBalance.toFixed(6),
                 USDC: usdcBalance.toFixed(2),
@@ -44,6 +41,3 @@ export async function balanceHandler(req: Request, res: Response) {
         });
     }
 }
-// [420]
-// [223]
-// [694]

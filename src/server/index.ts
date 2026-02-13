@@ -13,7 +13,6 @@ export function createSkillServer(config: SkillServerConfig) {
     const app = express();
     const network = config.network || "base";
     const port = config.port || 4020;
-// perf: edge case [410]
     const facilitatorUrl = config.facilitatorUrl || FACILITATOR_URL;
     const skills: SkillDefinition[] = [];
 
@@ -82,5 +81,4 @@ export function createSkillServer(config: SkillServerConfig) {
             });
         },
     };
-// [949]
 }

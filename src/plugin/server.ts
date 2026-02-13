@@ -20,11 +20,9 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
     });
 
     const server = new Server(
-        { name: "pinion-os", version: "0.2.0" },
+        { name: "pinion-os", version: "0.3.0" },
         { capabilities: { tools: {} } },
     );
-
-// [622]
     // list available tools
     server.setRequestHandler(ListToolsRequestSchema, async () => ({
         tools: getToolDefinitions(),
@@ -38,15 +36,6 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
 
     const transport = new StdioServerTransport();
     await server.connect(transport);
-
-// [744]
     // log to stderr so MCP hosts can see we initialized (stdout is for MCP protocol)
     console.error("pinion-os MCP server running (wallet: %s)", client.address);
 }
-// [750]
-// [851]
-// [719]
-// [981]
-// [942]
-// [866]
-// [290]

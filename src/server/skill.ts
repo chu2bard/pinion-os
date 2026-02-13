@@ -23,7 +23,6 @@ interface SkillOptions {
  *     },
  * })
  */
-// [661]
 export function skill(name: string, opts: SkillOptions): SkillDefinition {
     return {
         name,
@@ -34,4 +33,3 @@ export function skill(name: string, opts: SkillOptions): SkillDefinition {
         handler: opts.handler,
     };
 }
-// [905]

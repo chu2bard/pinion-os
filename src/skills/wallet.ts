@@ -35,4 +35,3 @@ export async function walletHandler(_req: Request, res: Response) {
         });
     }
 }
-// [556]

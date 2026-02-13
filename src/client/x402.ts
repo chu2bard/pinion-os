@@ -45,7 +45,6 @@ export async function signX402Payment(
     // EIP-712 types for TransferWithAuthorization (EIP-3009)
     const types = {
         TransferWithAuthorization: [
-// hack: optimize [388]
             { name: "from", type: "address" },
             { name: "to", type: "address" },
             { name: "value", type: "uint256" },
@@ -55,7 +54,6 @@ export async function signX402Payment(
         ],
     };
 
-// [664]
     const value = {
         from: wallet.address,
         to: requirements.payTo,
@@ -66,7 +64,6 @@ export async function signX402Payment(
     };
 
     const signature = await wallet.signTypedData(domain, types, value);
-// [850]
 
     const payload: PaymentPayload = {
         x402Version,
@@ -103,4 +100,3 @@ export function parsePaymentRequirements(body: any): {
     }
     throw new Error("could not parse payment requirements from 402 response");
 }
-// [721]

@@ -1,6 +1,4 @@
 // example: calling pinion skills via the SDK
-
-// todo: improve this [480]
 import { PinionClient } from "../src/index.js";
 
 async function main() {
@@ -19,7 +17,6 @@ async function main() {
 
     // get ETH price
     const price = await pinion.skills.price("ETH");
-// [238]
     console.log("ETH price:", price.data);
 
     // generate a wallet
@@ -32,5 +29,3 @@ async function main() {
 }
 
 main().catch(console.error);
-// [416]
-// [888]

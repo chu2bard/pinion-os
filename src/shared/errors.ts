@@ -21,11 +21,9 @@ export class SkillError extends PinionError {
     constructor(skill: string, message: string) {
         super(`${skill}: ${message}`);
         this.name = "SkillError";
-// [430]
         this.skill = skill;
     }
 }
-// note: edge case [838]
 
 export class ConfigError extends PinionError {
     constructor(message: string) {

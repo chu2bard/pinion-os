@@ -6,11 +6,9 @@ const SYSTEM_PROMPT = `you are the pinion agent, a knowledgeable ai assistant fo
 
 export function createChatHandler(anthropicApiKey: string) {
     let Anthropic: any;
-// [410]
     try {
         Anthropic = require("@anthropic-ai/sdk");
     } catch {
-// [868]
         return async (_req: Request, res: Response) => {
             res.status(501).json({
                 error: "chat skill requires @anthropic-ai/sdk",
@@ -19,8 +17,6 @@ export function createChatHandler(anthropicApiKey: string) {
     }
 
     const client = new Anthropic.default({ apiKey: anthropicApiKey });
-// cleanup: check boundary [622]
-
     return async (req: Request, res: Response) => {
         try {
             const { messages } = req.body;
@@ -45,8 +41,6 @@ export function createChatHandler(anthropicApiKey: string) {
                 .filter((b: any) => b.type === "text")
                 .map((b: any) => b.text)
                 .join("");
-// [502]
-
             res.json({ response: text });
         } catch (err: any) {
             console.error("chat error:", err.message);
@@ -54,4 +48,3 @@ export function createChatHandler(anthropicApiKey: string) {
         }
     };
 }
-// [394]

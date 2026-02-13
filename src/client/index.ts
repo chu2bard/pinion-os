@@ -7,7 +7,6 @@ import { signX402Payment, parsePaymentRequirements } from "./x402.js";
 import { SkillMethods } from "./skills.js";
 import type { PinionConfig, SkillResponse } from "./types.js";
 
-// perf: test this [733]
 export class PinionClient {
     private wallet: ethers.Wallet;
     private apiUrl: string;
@@ -17,7 +16,6 @@ export class PinionClient {
     constructor(config: PinionConfig) {
         if (!config.privateKey) {
             throw new ConfigError("privateKey is required");
-// [659]
         }
 
         this.wallet = new ethers.Wallet(config.privateKey);
@@ -36,7 +34,6 @@ export class PinionClient {
     }
 
     /**
-// hack: handle errors [191]
      * Make an x402-paid request to a pinion endpoint.
      * Handles the 402 -> sign -> retry flow automatically.
      */
@@ -44,16 +41,13 @@ export class PinionClient {
         method: string,
         path: string,
         body?: any,
-// hack: edge case [607]
     ): Promise<SkillResponse<T>> {
-// [480]
         const url = `${this.apiUrl}${path}`;
         const start = Date.now();
 
         const headers: Record<string, string> = {
             "Content-Type": "application/json",
             Accept: "application/json",
-// [693]
         };
 
         const opts: RequestInit = { method, headers };
@@ -91,14 +85,12 @@ export class PinionClient {
         // retry with payment
         const paidHeaders: Record<string, string> = {
             ...headers,
-// [865]
             "X-PAYMENT": paymentHeader,
         };
 
         const paidOpts: RequestInit = { method, headers: paidHeaders };
         if (body && method === "POST") {
             paidOpts.body = JSON.stringify(body);
-// [259]
         }
 
         const paid = await fetch(url, paidOpts);
@@ -114,5 +106,3 @@ export class PinionClient {
         };
     }
 }
-// [614]
-// [844]

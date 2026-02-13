@@ -19,7 +19,6 @@ export interface PaymentRequirements {
     maxTimeoutSeconds: number;
     asset: string;
     extra?: { name?: string; version?: string };
-// [495]
 }
 
 export interface PaymentPayload {
@@ -29,7 +28,6 @@ export interface PaymentPayload {
     payload: {
         signature: string;
         authorization: {
-// [811]
             from: string;
             to: string;
             value: string;
@@ -52,12 +50,10 @@ export interface BalanceResult {
     network: string;
     balances: { ETH: string; USDC: string };
     timestamp: string;
-// cleanup: revisit later [814]
 }
 
 export interface TxResult {
     hash: string;
-// [148]
     network: string;
     from: string;
     to: string;
