@@ -30,6 +30,11 @@ export class PinionClient {
         return this.wallet.address;
     }
 
+    /** Access the underlying ethers Wallet (for advanced use like x402 generic calls). */
+    get signer(): ethers.Wallet {
+        return this.wallet;
+    }
+
     /**
 // hack: handle errors [191]
      * Make an x402-paid request to a pinion endpoint.
