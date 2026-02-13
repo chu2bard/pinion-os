@@ -110,14 +110,46 @@ console.log(w.data);  // { address, privateKey }
 // chat with the agent
 const chat = await pinion.skills.chat("what is x402?");
 console.log(chat.data);  // { response: "..." }
+
+// construct a send transaction (sign + broadcast yourself)
+const send = await pinion.skills.send("0xRecipient...", "0.1", "ETH");
+console.log(send.data);  // { tx: { to, value, data, chainId }, ... }
+
+// swap tokens via 1inch (returns unsigned tx)
+const trade = await pinion.skills.trade("USDC", "ETH", "10");
+console.log(trade.data);  // { swap: { to, data, value }, approve?: {...} }
+
+// check funding status for a wallet
+const fund = await pinion.skills.fund("0x1234...");
+console.log(fund.data);  // { balances, funding: { steps, ... } }
 ```
 
-Every call costs $0.01 USDC on Base via x402. Payment is handled automatically.
+Server-side skills cost $0.01 USDC on Base via x402. Payment is handled automatically.
+
+### Calling any x402 endpoint
+
+Use `payX402Service` to call any server that supports the x402 protocol:
+
+```typescript
+import { PinionClient, payX402Service } from "pinion-os";
+
+const pinion = new PinionClient({
+  privateKey: process.env.PINION_PRIVATE_KEY,
+});
+
+// call an external x402 service
+const result = await payX402Service(pinion.signer, "https://example.com/api/weather", {
+  method: "GET",
+  maxAmount: "100000", // max $0.10 USDC
+});
+console.log(result.data);
+```
 
 ## MCP Plugin Setup
 
-The plugin exposes five tools to any MCP-compatible host: `pinion_balance`,
-`pinion_tx`, `pinion_price`, `pinion_wallet`, `pinion_chat`.
+The plugin exposes ten tools to any MCP-compatible host: `pinion_balance`,
+`pinion_tx`, `pinion_price`, `pinion_wallet`, `pinion_chat`, `pinion_send`,
+`pinion_trade`, `pinion_fund`, `pinion_pay_service`, `pinion_spend_limit`.
 
 ### Claude Desktop
 
@@ -160,8 +192,8 @@ Set the env var when prompted, or export before launching:
 export PINION_PRIVATE_KEY=0xYOUR_KEY
 ```
 
-After installing, Claude can use `pinion_balance`, `pinion_tx`, `pinion_price`,
-`pinion_wallet`, `pinion_chat` as tools.
+After installing, Claude can use all ten pinion tools: balance, tx, price,
+wallet, chat, send, trade, fund, pay_service, spend_limit.
 
 Alternative (MCP-only, without plugin features):
 
@@ -198,6 +230,8 @@ The plugin communicates over stdio using the standard MCP protocol.
 
 ## Available Skills
 
+### Server-side (x402-paid, $0.01 USDC each)
+
 | Skill | SDK Method | Endpoint | Price | Returns |
 |-------|------------|----------|-------|---------|
 | balance | `skills.balance(addr)` | GET /balance/:address | $0.01 | ETH + USDC balances |
@@ -205,6 +239,16 @@ The plugin communicates over stdio using the standard MCP protocol.
 | price | `skills.price(token)` | GET /price/:token | $0.01 | USD price |
 | wallet | `skills.wallet()` | GET /wallet/generate | $0.01 | New keypair |
 | chat | `skills.chat(msg)` | POST /chat | $0.01 | Agent response |
+| send | `skills.send(to, amt, token)` | POST /send | $0.01 | Unsigned transfer tx |
+| trade | `skills.trade(src, dst, amt)` | POST /trade | $0.01 | Unsigned swap tx (1inch) |
+| fund | `skills.fund(addr)` | GET /fund/:address | $0.01 | Balance + deposit info |
+
+### Client-side (SDK/MCP plugin only)
+
+| Skill | SDK / MCP Tool | Description |
+|-------|---------------|-------------|
+| pay-for-service | `payX402Service(wallet, url)` / `pinion_pay_service` | Call any x402 endpoint on the internet |
+| spend-limit | `pinion_spend_limit` (MCP only) | Per-session USDC budget tracking |
 
 ## Build Your Own Skills
 
@@ -256,6 +300,7 @@ The server automatically:
 | `ADDRESS` | server only | -- | Wallet address to receive payments |
 | `FACILITATOR_URL` | server only | `https://facilitator.payai.network` | x402 facilitator endpoint |
 | `ANTHROPIC_API_KEY` | chat skill | -- | Anthropic API key for the chat skill |
+| `ONEINCH_API_KEY` | trade skill | -- | 1inch API key for token swaps (server-side) |
 
 ## Project Structure
 
@@ -271,9 +316,11 @@ pinion-os/
       skills.ts          typed skill wrappers
       types.ts           TypeScript interfaces
       x402.ts            EIP-3009 payment signing
+      x402-generic.ts    generic x402 caller for any endpoint
     plugin/            Claude MCP server
       server.ts          MCP request handlers
-      tools.ts           tool definitions + dispatch
+      tools.ts           tool definitions + dispatch (10 tools)
+      limits.ts          per-session spend limit tracker
       config.ts          env/arg configuration
       index.ts           CLI entry point (npx pinion-os)
     server/            Framework for building skills
