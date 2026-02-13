@@ -20,7 +20,7 @@ export async function startMcpServer(configOverride?: Partial<PluginConfig>) {
     });
 
     const server = new Server(
-        { name: "pinion-os", version: "0.3.0" },
+        { name: "pinion-os", version: "0.3.1" },
         { capabilities: { tools: {} } },
     );
     // list available tools
