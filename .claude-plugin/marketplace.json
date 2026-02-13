@@ -11,7 +11,10 @@
       "name": "pinion-os",
       "description": "On-chain AI skills (balance, tx, price, wallet, chat, send, trade, fund) via x402 micropayments on Base",
       "version": "0.3.1",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "chu2bard/pinion-os"
+      },
       "author": { "name": "chu2bard" },
       "homepage": "https://github.com/chu2bard/pinion-os",
       "keywords": ["x402", "mcp", "claude", "agents", "payments", "base"]
