@@ -1,20 +1,18 @@
 {
     "name": "pinion-chain-intel",
     "version": "1.0.0",
-    "description": "On-chain intelligence for Base -- wallet balances, transaction lookups, and token prices. Paywalled via x402 USDC micropayments.",
+    "description": "On-chain intelligence, transactions and wallet tools on Base. 8 skills paywalled via x402 USDC micropayments (.01 each).",
     "author": "Pinion Protocol",
     "license": "MIT",
-    "homepage": "https://github.com/chu2bard/pinion-os",
+    "homepage": "https://pinionos.com",
     "skills": [
         {
-
             "name": "balance",
             "description": "Get ETH and USDC balances for any Base address",
             "endpoint": "/balance/:address",
             "method": "GET",
             "price": "$0.01",
             "currency": "USDC",
-
             "network": "base",
             "inputSchema": {
                 "type": "object",
@@ -25,7 +23,9 @@
                         "pattern": "^0x[0-9a-fA-F]{40}$"
                     }
                 },
-                "required": ["address"]
+                "required": [
+                    "address"
+                ]
             }
         },
         {
@@ -35,9 +35,7 @@
             "method": "GET",
             "price": "$0.01",
             "currency": "USDC",
-
             "network": "base",
-
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -47,8 +45,9 @@
                         "pattern": "^0x[0-9a-fA-F]{64}$"
                     }
                 },
-                "required": ["hash"]
-
+                "required": [
+                    "hash"
+                ]
             }
         },
         {
@@ -65,10 +64,19 @@
                     "token": {
                         "type": "string",
                         "description": "Token symbol (ETH, USDC, WETH, DAI, USDT, CBETH)",
-                        "enum": ["ETH", "USDC", "WETH", "DAI", "USDT", "CBETH"]
+                        "enum": [
+                            "ETH",
+                            "USDC",
+                            "WETH",
+                            "DAI",
+                            "USDT",
+                            "CBETH"
+                        ]
                     }
                 },
-                "required": ["token"]
+                "required": [
+                    "token"
+                ]
             }
         },
         {
@@ -102,13 +110,19 @@
                         "items": {
                             "type": "object",
                             "properties": {
-                                "role": { "type": "string" },
-                                "content": { "type": "string" }
+                                "role": {
+                                    "type": "string"
+                                },
+                                "content": {
+                                    "type": "string"
+                                }
                             }
                         }
                     }
                 },
-                "required": ["messages"]
+                "required": [
+                    "messages"
+                ]
             }
         },
         {
@@ -122,11 +136,27 @@
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "to": { "type": "string", "description": "Recipient address (0x...)" },
-                    "amount": { "type": "string", "description": "Amount in human-readable units" },
-                    "token": { "type": "string", "enum": ["ETH", "USDC"] }
+                    "to": {
+                        "type": "string",
+                        "description": "Recipient address (0x...)"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "Amount in human-readable units"
+                    },
+                    "token": {
+                        "type": "string",
+                        "enum": [
+                            "ETH",
+                            "USDC"
+                        ]
+                    }
                 },
-                "required": ["to", "amount", "token"]
+                "required": [
+                    "to",
+                    "amount",
+                    "token"
+                ]
             }
         },
         {
@@ -140,13 +170,33 @@
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "src": { "type": "string", "description": "Source token symbol" },
-                    "dst": { "type": "string", "description": "Destination token symbol" },
-                    "amount": { "type": "string", "description": "Amount of source token" },
-                    "from": { "type": "string", "description": "Sender address (0x...)" },
-                    "slippage": { "type": "number", "description": "Slippage tolerance %" }
+                    "src": {
+                        "type": "string",
+                        "description": "Source token symbol"
+                    },
+                    "dst": {
+                        "type": "string",
+                        "description": "Destination token symbol"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "Amount of source token"
+                    },
+                    "from": {
+                        "type": "string",
+                        "description": "Sender address (0x...)"
+                    },
+                    "slippage": {
+                        "type": "number",
+                        "description": "Slippage tolerance %"
+                    }
                 },
-                "required": ["src", "dst", "amount", "from"]
+                "required": [
+                    "src",
+                    "dst",
+                    "amount",
+                    "from"
+                ]
             }
         },
         {
@@ -160,16 +210,30 @@
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "address": { "type": "string", "description": "Ethereum address (0x...)" }
+                    "address": {
+                        "type": "string",
+                        "description": "Ethereum address (0x...)"
+                    }
                 },
-                "required": ["address"]
+                "required": [
+                    "address"
+                ]
             }
         }
     ],
-
     "x402": {
         "facilitator": "https://facilitator.payai.network",
         "network": "base",
         "paymentToken": "USDC"
-    }
+    },
+    "skillDirs": [
+        "skills/balance",
+        "skills/tx",
+        "skills/price",
+        "skills/wallet",
+        "skills/chat",
+        "skills/send",
+        "skills/trade",
+        "skills/fund"
+    ]
 }
