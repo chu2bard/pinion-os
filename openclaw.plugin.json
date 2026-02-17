@@ -1,7 +1,7 @@
 {
     "name": "pinion-chain-intel",
     "version": "1.0.0",
-    "description": "On-chain intelligence, transactions and wallet tools on Base. 8 skills paywalled via x402 USDC micropayments (.01 each).",
+    "description": "On-chain intelligence, transactions and wallet tools on Base. 9 skills paywalled via x402 USDC micropayments (.01 each).",
     "author": "Pinion Protocol",
     "license": "MIT",
     "homepage": "https://pinionos.com",
@@ -219,6 +219,39 @@
                     "address"
                 ]
             }
+        },
+        {
+            "name": "broadcast",
+            "description": "Sign and broadcast an unsigned transaction on Base",
+            "endpoint": "/broadcast",
+            "method": "POST",
+            "price": "$0.01",
+            "currency": "USDC",
+            "network": "base",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "tx": {
+                        "type": "object",
+                        "description": "Unsigned transaction object (from /send or /trade)",
+                        "properties": {
+                            "to": { "type": "string", "description": "Recipient or contract address" },
+                            "value": { "type": "string", "description": "ETH value in hex" },
+                            "data": { "type": "string", "description": "Calldata in hex" },
+                            "chainId": { "type": "number", "description": "Must be 8453 (Base)" }
+                        },
+                        "required": ["to", "chainId"]
+                    },
+                    "privateKey": {
+                        "type": "string",
+                        "description": "Sender's private key (0x + 64 hex chars)"
+                    }
+                },
+                "required": [
+                    "tx",
+                    "privateKey"
+                ]
+            }
         }
     ],
     "x402": {
@@ -234,6 +267,7 @@
         "skills/chat",
         "skills/send",
         "skills/trade",
-        "skills/fund"
+        "skills/fund",
+        "skills/broadcast"
     ]
 }

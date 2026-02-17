@@ -1,6 +1,6 @@
 ---
 name: pinion-chain-intel
-description: On-chain intelligence, transactions and wallet tools on Base. 8 x402-paywalled skills at $0.01 USDC each.
+description: On-chain intelligence, transactions and wallet tools on Base. 9 x402-paywalled skills at $0.01 USDC each.
 ---
 
 # Pinion Chain Intel -- OpenClaw Skills
@@ -23,6 +23,7 @@ On-chain intelligence, transactions, wallet tools and an AI agent on Base, paywa
 | 6 | [send](skills/send/SKILL.md) | `/send` | POST | Construct an unsigned ETH or USDC transfer on Base |
 | 7 | [trade](skills/trade/SKILL.md) | `/trade` | POST | Get an unsigned swap tx via 1inch aggregator on Base |
 | 8 | [fund](skills/fund/SKILL.md) | `/fund/:address` | GET | Wallet balances and funding instructions for Base |
+| 9 | [broadcast](skills/broadcast/SKILL.md) | `/broadcast` | POST | Sign and broadcast an unsigned tx on Base |
 
 Each skill has its own `SKILL.md` in `skills/<name>/` with full parameters, example requests and responses.
 
@@ -103,6 +104,7 @@ pinion-openclaw-skill/
     send/SKILL.md           -- send ETH/USDC
     trade/SKILL.md          -- swap tokens via 1inch
     fund/SKILL.md           -- funding instructions
+    broadcast/SKILL.md      -- sign and broadcast tx
 ```
 
 ## Tech Stack
