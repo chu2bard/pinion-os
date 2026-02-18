@@ -136,6 +136,17 @@ export interface PayServiceResult {
     responseTimeMs: number;
 }
 
+export interface BroadcastResult {
+    txHash: string;
+    from: string;
+    to: string;
+    network: string;
+    chainId: number;
+    explorer: string;
+    note: string;
+    timestamp: string;
+}
+
 export interface SpendLimitConfig {
     maxUsdcAtomic: bigint;
     spent: bigint;

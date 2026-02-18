@@ -123,7 +123,7 @@ export function getToolDefinitions(): ToolDef[] {
         {
             name: "pinion_send",
             description:
-                "Construct an unsigned ETH or USDC transfer transaction on Base. Returns tx object to sign locally. Costs $0.01 USDC via x402.",
+                "Construct an unsigned ETH or USDC transfer transaction on Base. Returns tx object -- use pinion_broadcast to sign and execute it. Costs $0.01 USDC via x402.",
             inputSchema: {
                 type: "object",
                 properties: {
@@ -148,7 +148,7 @@ export function getToolDefinitions(): ToolDef[] {
         {
             name: "pinion_trade",
             description:
-                "Get an unsigned swap transaction via 1inch aggregator on Base. Returns swap tx (and optional approve tx) to sign locally. Costs $0.01 USDC via x402.",
+                "Get an unsigned swap transaction via 1inch aggregator on Base. Returns swap tx (and optional approve tx) -- use pinion_broadcast to sign and execute each one. Costs $0.01 USDC via x402.",
             inputSchema: {
                 type: "object",
                 properties: {
@@ -214,6 +214,28 @@ export function getToolDefinitions(): ToolDef[] {
                     },
                 },
                 required: ["url"],
+            },
+        },
+        {
+            name: "pinion_broadcast",
+            description:
+                "Sign and broadcast a transaction on Base. Use this after pinion_send or pinion_trade to execute the unsigned transaction. Automatically uses the configured wallet's private key. Costs $0.01 USDC via x402.",
+            inputSchema: {
+                type: "object",
+                properties: {
+                    tx: {
+                        type: "object",
+                        description: "Unsigned transaction object (from pinion_send or pinion_trade response)",
+                        properties: {
+                            to: { type: "string" },
+                            data: { type: "string" },
+                            value: { type: "string" },
+                            gasLimit: { type: "string" },
+                        },
+                        required: ["to"],
+                    },
+                },
+                required: ["tx"],
             },
         },
         {
@@ -288,7 +310,7 @@ export async function handleToolCall(
         const paidTools = [
             "pinion_balance", "pinion_tx", "pinion_price",
             "pinion_wallet", "pinion_chat", "pinion_send",
-            "pinion_trade", "pinion_fund",
+            "pinion_trade", "pinion_fund", "pinion_broadcast",
         ];
 
         if (paidTools.includes(toolName) && !spendTracker.canSpend(COST_ATOMIC)) {
@@ -326,6 +348,9 @@ export async function handleToolCall(
                 result = await client.skills.trade(
                     args.src, args.dst, args.amount, args.slippage,
                 );
+                break;
+            case "pinion_broadcast":
+                result = await client.skills.broadcast(args.tx);
                 break;
             case "pinion_fund":
                 result = await client.skills.fund(args.address);

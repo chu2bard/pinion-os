@@ -11,6 +11,7 @@ import type {
     SendResult,
     TradeResult,
     FundResult,
+    BroadcastResult,
     SkillResponse,
 } from "./types.js";
 
@@ -122,5 +123,21 @@ export class SkillMethods {
             throw new SkillError("fund", "invalid ethereum address");
         }
         return this.client.request<FundResult>("GET", `/fund/${addr}`);
+    }
+
+    /**
+     * Sign and broadcast a transaction on Base.
+     * Uses the configured wallet's private key by default.
+     * Pass the unsigned tx object from pinion_send or pinion_trade.
+     */
+    async broadcast(
+        tx: { to: string; data?: string; value?: string; gasLimit?: string },
+        privateKey?: string,
+    ): Promise<SkillResponse<BroadcastResult>> {
+        const key = privateKey || this.client.signer.privateKey;
+        return this.client.request<BroadcastResult>("POST", "/broadcast", {
+            tx,
+            privateKey: key,
+        });
     }
 }
