@@ -182,7 +182,7 @@ Add the marketplace and install:
 
 ```
 /plugin marketplace add chu2bard/pinion-os
-/plugin install pinion-os@chu2bard-pinion-os
+/plugin install pinion-os
 ```
 
 Set the env var when prompted, or export before launching:
