@@ -1,8 +1,10 @@
-// generic x402 service caller -- pay any x402 endpoint, not just pinionos.com
+﻿// generic x402 service caller -- pay any x402 endpoint, not just pinionos.com
 // this is the equivalent of `awal x402 pay <url>`
+// supports both v1 (x402-express) and v2 (@x402/express, Stripe) transports
 
 import { ethers } from "ethers";
 import { signX402Payment, parsePaymentRequirements } from "./x402.js";
+import { parseV2PaymentRequired, signV2Payment } from "./x402-v2.js";
 import type { PayServiceResult } from "./types.js";
 
 export interface PayServiceOptions {
@@ -21,9 +23,10 @@ export interface PayServiceOptions {
  * 1. initial request -> 402
  * 2. parse payment requirements
  * 3. sign EIP-3009 authorization
- * 4. retry with X-PAYMENT header
+ * 4. retry with X-PAYMENT header (v1) or PAYMENT-SIGNATURE header (v2)
  *
  * Works against any server using the x402 protocol, not just pinionos.com.
+ * Auto-detects v1 vs v2 transport from the 402 response.
  */
 export async function payX402Service(
     wallet: ethers.Wallet,
@@ -48,7 +51,6 @@ export async function payX402Service(
     const initial = await fetch(url, opts);
 
     if (initial.status !== 402) {
-        // not a paywalled endpoint or already accessible
         const data = await initial.json().catch(() => ({
             error: "non-json response",
         }));
@@ -62,11 +64,58 @@ export async function payX402Service(
         };
     }
 
-    // step 2: parse payment requirements from 402 body
+    // step 2: detect v1 vs v2 and parse payment requirements
+    const v2 = parseV2PaymentRequired(initial);
+
+    if (v2) {
+        // ---- v2 transport (Stripe, @x402/express v2.x) ----
+        const accepted = v2.accepts[0];
+
+        if (options.maxAmount) {
+            const required = BigInt(accepted.amount);
+            const max = BigInt(options.maxAmount);
+            if (required > max) {
+                throw new Error(
+                    `x402 payment exceeds max amount: required ${accepted.amount} > max ${options.maxAmount}`,
+                );
+            }
+        }
+
+        const paymentHeader = await signV2Payment(
+            wallet,
+            accepted,
+            v2.resource,
+        );
+
+        const paidHeaders: Record<string, string> = {
+            ...reqHeaders,
+            "PAYMENT-SIGNATURE": paymentHeader,
+        };
+
+        const paidOpts: RequestInit = { method, headers: paidHeaders };
+        if (options.body && (method === "POST" || method === "PUT" || method === "PATCH")) {
+            paidOpts.body = JSON.stringify(options.body);
+        }
+
+        const paid = await fetch(url, paidOpts);
+        const data = await paid.json().catch(() => ({
+            error: "non-json response",
+        }));
+
+        return {
+            status: paid.status,
+            data,
+            url,
+            method,
+            paidAmount: accepted.amount,
+            responseTimeMs: Date.now() - start,
+        };
+    }
+
+    // ---- v1 transport (x402-express, pinionos.com) ---- existing code below ----
     const reqBody = await initial.json();
     const { requirements, x402Version } = parsePaymentRequirements(reqBody);
 
-    // check against max amount if specified
     if (options.maxAmount) {
         const required = BigInt(requirements.maxAmountRequired);
         const max = BigInt(options.maxAmount);
@@ -77,10 +126,8 @@ export async function payX402Service(
         }
     }
 
-    // step 3: sign payment
     const paymentHeader = await signX402Payment(wallet, requirements, x402Version);
 
-    // step 4: retry with payment
     const paidHeaders: Record<string, string> = {
         ...reqHeaders,
         "X-PAYMENT": paymentHeader,

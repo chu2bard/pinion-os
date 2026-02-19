@@ -21,7 +21,12 @@ export const FACILITATOR_URL = "https://facilitator.payai.network";
 export const DEFAULT_SKILL_PRICE = "$0.01";
 
 export function getChainId(network: string): number {
-    if (network === "base-sepolia") return BASE_SEPOLIA_CHAIN_ID;
+    if (network === "base-sepolia" || network === "eip155:84532")
+        return BASE_SEPOLIA_CHAIN_ID;
+    if (network === "base" || network === "eip155:8453")
+        return BASE_CHAIN_ID;
+    const eipMatch = network.match(/^eip155:(\d+)$/);
+    if (eipMatch) return parseInt(eipMatch[1], 10);
     return BASE_CHAIN_ID;
 }
 

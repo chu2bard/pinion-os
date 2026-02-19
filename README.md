@@ -143,6 +143,38 @@ const result = await payX402Service(pinion.signer, "https://example.com/api/weat
 });
 console.log(result.data);
 ```
+### Pay Web2 Services via Stripe x402
+
+Any web2 service using [Stripe x402](https://docs.stripe.com/payments/machine/x402) can be paid by your Pinion agent. The SDK auto-detects whether a server speaks v1 or v2 x402 transport — no config needed.
+
+```typescript
+import { PinionClient, payX402Service } from "pinion-os";
+
+const pinion = new PinionClient({
+  privateKey: process.env.PINION_PRIVATE_KEY,
+});
+
+// pay a Stripe-powered API — works the same as any x402 endpoint
+const result = await payX402Service(pinion.signer, "https://api.example.com/premium-data", {
+  method: "GET",
+  maxAmount: "100000", // max console.log(result.data);
+```
+
+## MCP Plugin Setup.10 USDC
+});
+console.log(result.data);
+```
+
+Or via Claude with the MCP plugin:
+
+```
+"Call https://api.example.com/premium-data using pinion_pay_service"
+```
+
+The agent pays USDC on Base. Stripe handles settlement on the server side.
+No Stripe account needed on the agent side — the server operator has the Stripe account.
+
+Supports both x402 v1 (`x402-express`) and v2 (`@x402/express`, Stripe) servers automatically.
 
 ## MCP Plugin Setup
 
