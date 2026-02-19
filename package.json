@@ -1,6 +1,6 @@
 ﻿{
   "name": "pinion-os",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "type": "module",
   "description": "Client SDK, Claude plugin and skill framework for the Pinion protocol. x402 micropayments on Base.",
   "main": "dist/index.js",
